@@ -1,4 +1,3 @@
-import Image from "next/image";
 import { Github, Linkedin, Mail, ExternalLink, Award, MapPin, Calendar, ArrowUpRight, Code, Brain, Cloud, FileText, Briefcase } from "lucide-react";
 
 export default function Home() {
