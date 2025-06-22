@@ -1,6 +1,19 @@
-import { Github, Linkedin, Mail, ExternalLink, Award, MapPin, Calendar, ArrowUpRight, Code, Brain, Cloud, FileText, Briefcase } from "lucide-react";
+"use client";
+
+import { useState } from "react";
+import { Github, Linkedin, Mail, ExternalLink, Award, MapPin, Calendar, ArrowUpRight, Code, Brain, Cloud, FileText, Briefcase, X } from "lucide-react";
 
 export default function Home() {
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+
+  const toggleMobileMenu = () => {
+    setMobileMenuOpen(!mobileMenuOpen);
+  };
+
+  const closeMobileMenu = () => {
+    setMobileMenuOpen(false);
+  };
+
   return (
     <div className="min-h-screen bg-slate-950 text-white relative overflow-hidden">
       {/* Ambient background elements */}
@@ -27,6 +40,8 @@ export default function Home() {
               <div className="text-xl font-medium tracking-tight">
                 William <span className="text-blue-400">Westerkamp</span>
               </div>
+              
+              {/* Desktop Navigation */}
               <div className="hidden md:flex space-x-8 text-sm">
                 <a href="#about" className="text-slate-300 hover:text-blue-400 transition-colors">About</a>
                 <a href="#experience" className="text-slate-300 hover:text-blue-400 transition-colors">Experience</a>
@@ -34,12 +49,68 @@ export default function Home() {
                 <a href="#projects" className="text-slate-300 hover:text-blue-400 transition-colors">Projects</a>
                 <a href="#contact" className="text-slate-300 hover:text-blue-400 transition-colors">Contact</a>
               </div>
+              
               {/* Mobile menu button */}
-              <button className="md:hidden flex items-center justify-center w-10 h-10 text-slate-300 hover:text-blue-400">
-                <svg className="w-6 h-6" fill="none" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" viewBox="0 0 24 24" stroke="currentColor">
-                  <path d="M4 6h16M4 12h16M4 18h16"></path>
-                </svg>
+              <button 
+                onClick={toggleMobileMenu}
+                className="md:hidden flex items-center justify-center w-10 h-10 text-slate-300 hover:text-blue-400 transition-colors"
+                aria-label="Toggle mobile menu"
+              >
+                {mobileMenuOpen ? (
+                  <X className="w-6 h-6" />
+                ) : (
+                  <svg className="w-6 h-6" fill="none" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" viewBox="0 0 24 24" stroke="currentColor">
+                    <path d="M4 6h16M4 12h16M4 18h16"></path>
+                  </svg>
+                )}
               </button>
+            </div>
+          </div>
+
+          {/* Mobile Navigation Menu */}
+          <div className={`md:hidden transition-all duration-300 ease-in-out ${
+            mobileMenuOpen 
+              ? 'max-h-80 opacity-100' 
+              : 'max-h-0 opacity-0 overflow-hidden'
+          }`}>
+            <div className="px-6 py-4 bg-slate-950/95 backdrop-blur-xl border-t border-slate-800/50">
+              <div className="flex flex-col space-y-4">
+                <a 
+                  href="#about" 
+                  onClick={closeMobileMenu}
+                  className="text-slate-300 hover:text-blue-400 transition-colors py-2 text-lg"
+                >
+                  About
+                </a>
+                <a 
+                  href="#experience" 
+                  onClick={closeMobileMenu}
+                  className="text-slate-300 hover:text-blue-400 transition-colors py-2 text-lg"
+                >
+                  Experience
+                </a>
+                <a 
+                  href="#research" 
+                  onClick={closeMobileMenu}
+                  className="text-slate-300 hover:text-blue-400 transition-colors py-2 text-lg"
+                >
+                  Research
+                </a>
+                <a 
+                  href="#projects" 
+                  onClick={closeMobileMenu}
+                  className="text-slate-300 hover:text-blue-400 transition-colors py-2 text-lg"
+                >
+                  Projects
+                </a>
+                <a 
+                  href="#contact" 
+                  onClick={closeMobileMenu}
+                  className="text-slate-300 hover:text-blue-400 transition-colors py-2 text-lg"
+                >
+                  Contact
+                </a>
+              </div>
             </div>
           </div>
         </nav>
